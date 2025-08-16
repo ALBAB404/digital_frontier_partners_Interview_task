@@ -14,7 +14,7 @@ class Helper
     {
         $response = [
             'success' => true,
-            'msg'     => $message,
+            'message' => $message,
             'result'  => $result
         ];
 

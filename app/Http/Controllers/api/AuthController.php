@@ -3,15 +3,13 @@
 namespace App\Http\Controllers\api;
 
 use Exception;
-use Illuminate\Http\Request;
 use App\Classes\BaseController;
 use Illuminate\Support\Facades\DB;
-use App\Http\Requests\LoginRequest;
-use Illuminate\Support\Facades\Log;
-use App\Repositories\AuthRepository;
-use App\Http\Requests\RegisterRequest;
-use App\Http\Resources\UserResource;
 use App\Exceptions\CustomException;
+use App\Http\Requests\api\LoginRequest;
+use Illuminate\Support\Facades\Log;
+use App\Repositories\api\AuthRepository;
+use App\Http\Requests\RegisterRequest;
 
 class AuthController extends BaseController
 {
@@ -21,11 +19,12 @@ class AuthController extends BaseController
     {
         try {
             DB::beginTransaction();
+
             $user = $this->repository->register($request);
 
             DB::commit();
 
-            return $this->sendResponse('', "Register successfully done");
+            return $this->sendResponse($user, "User registered successfully", 201);
         } catch (Exception $exception) {
             DB::rollBack();
             Log::error($exception->getMessage());
@@ -37,14 +36,9 @@ class AuthController extends BaseController
     public function login(LoginRequest $request)
     {
         try {
-            $data = $this->repository->login($request);
+            $token = $this->repository->login($request);
 
-            $data = [
-                "user"  => new UserResource($data["user"]),
-                "token" => $data["token"],
-            ];
-
-            return $this->sendResponse($data, "Login successfully done");
+            return $this->sendResponse($token, "Login successful");
 
         } catch (CustomException $exception) {
 

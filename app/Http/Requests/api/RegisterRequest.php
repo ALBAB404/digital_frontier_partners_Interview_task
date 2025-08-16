@@ -18,8 +18,10 @@ class RegisterRequest extends FormRequest
     {
         return [
             'name' => 'required|string|max:255',
-            'phone_number' => 'required|regex:/^[0-9]+$/|digits:11',
-            'password' => 'required|min:6',
+            'email' => 'required|email|unique:users,email',
+            'password' => 'required|string|min:6|confirmed',
+            'latitude' => 'required|numeric|between:-90,90',
+            'longitude' => 'required|numeric|between:-180,180',
         ];
     }
 }
