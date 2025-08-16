@@ -7,6 +7,7 @@ use App\Classes\BaseController;
 use Illuminate\Support\Facades\Log;
 use App\Http\Requests\api\BookRequest;
 use App\Repositories\api\BookRepository;
+use App\Http\Resources\api\BookResource;
 
 class BookController extends BaseController
 {
@@ -14,19 +15,23 @@ class BookController extends BaseController
 
     public function index()
     {
-        $books = $this->repository->index();
+        try {
+            $books = $this->repository->index();
+            $books = BookResource::collection($books);
+            return $this->sendResponse($books, 'Books fetched successfully', 200, 'books');
+        } catch (Exception $exception) {
+            Log::error($exception->getMessage());
 
-        return $this->sendResponse($books, "Books fetched successfully");
+            return $this->sendError(__("common.commonError"));
+        }
     }
 
     public function store(BookRequest $request)
     {
         try {
             $book = $this->repository->store($request);
-
-            // $category = new CategoryResource($category);
-
-            return $this->sendResponse($book, 'Book created successfully', 201);
+            $book = new BookResource($book);
+            return $this->sendResponse($book, 'Book shared successfully', 201, 'book');
         } catch (Exception $exception) {
             Log::error($exception->getMessage());
             return $this->sendError(__("common.commonError"));

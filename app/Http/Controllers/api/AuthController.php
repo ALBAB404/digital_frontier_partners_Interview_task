@@ -9,7 +9,7 @@ use App\Exceptions\CustomException;
 use App\Http\Requests\api\LoginRequest;
 use Illuminate\Support\Facades\Log;
 use App\Repositories\api\AuthRepository;
-use App\Http\Requests\RegisterRequest;
+use App\Http\Requests\api\RegisterRequest;
 
 class AuthController extends BaseController
 {

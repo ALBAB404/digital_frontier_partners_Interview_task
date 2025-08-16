@@ -6,9 +6,9 @@ use App\Classes\Helper;
 use Illuminate\Routing\Controller;
 class BaseController extends Controller
 {
-    function sendResponse($result, $message, $code = 200)
+    function sendResponse($result, $message, $code = 200, $requestName = 'result')
     {
-        return Helper::sendResponse($result, $message, $code);
+        return Helper::sendResponse($result, $message, $code, $requestName);
     }
 
     function sendError($message, $code = 500 )

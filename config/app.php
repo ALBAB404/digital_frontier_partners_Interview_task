@@ -123,4 +123,16 @@ return [
         'store' => env('APP_MAINTENANCE_STORE', 'database'),
     ],
 
+    /*
+    |--------------------------------------------------------------------------
+    | Nearby Books Configuration
+    |--------------------------------------------------------------------------
+    |
+    | This value determines the radius (in kilometers) within which books
+    | are considered "nearby" when users search for books in their area.
+    |
+    */
+
+    'nearby_books_radius' => env('NEARBY_BOOKS_RADIUS', 10),
+
 ];

@@ -10,12 +10,12 @@ use Intervention\Image\Drivers\Gd\Driver;
 
 class Helper
 {
-    public static function sendResponse($result, $message, $code = 200)
+    public static function sendResponse($result, $message, $code = 200, $requestName = 'result')
     {
         $response = [
-            'success' => true,
-            'message' => $message,
-            'result'  => $result
+            'success'    => true,
+            'message'    => $message,
+            $requestName => $result
         ];
 
         return response()->json($response, $code);

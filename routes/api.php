@@ -9,5 +9,6 @@ Route::post('register', [AuthController::class, 'register']);
 
 Route::middleware('auth:api')->group(function () {
     Route::post('books', [BookController::class, 'store']);
+    Route::get('books/nearby', [BookController::class, 'index']);
     Route::post('logout', [AuthController::class, 'logout']);
 });

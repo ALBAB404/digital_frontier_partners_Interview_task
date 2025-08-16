@@ -22,7 +22,6 @@ class AuthRepository
         ]);
 
         $token = $user->createToken("auth_token")->accessToken;
-
         $result = [
             "user"  => $user,
             "token" => $token
