@@ -15,6 +15,7 @@ class NearbyBooksTestUserSeeder extends Seeder
             [
                 'name'      => 'John Doe',
                 'email'     => 'imalbab1@gmail.com',
+                'role'      => 'user',
                 'latitude'  => 40.7128,
                 'longitude' => -74.0060,
                 'password'  => Hash::make('123456')
@@ -22,6 +23,7 @@ class NearbyBooksTestUserSeeder extends Seeder
             [
                 'name'      => 'Alice Smith',
                 'email'     => 'alice@example.com',
+                'role'      => 'user',
                 'latitude'  => 40.6782,
                 'longitude' => -73.9442,
                 'password'  => Hash::make('123456')
@@ -29,6 +31,7 @@ class NearbyBooksTestUserSeeder extends Seeder
             [
                 'name'      => 'Bob Johnson',
                 'email'     => 'bob@example.com',
+                'role'      => 'user',
                 'latitude'  => 40.7178,
                 'longitude' => -74.0431,
                 'password'  => Hash::make('123456')
@@ -36,6 +39,7 @@ class NearbyBooksTestUserSeeder extends Seeder
             [
                 'name'      => 'Charlie Brown',
                 'email'     => 'charlie@example.com',
+                'role'      => 'user',
                 'latitude'  => 40.7357,
                 'longitude' => -74.1724,
                 'password'  => Hash::make('123456')

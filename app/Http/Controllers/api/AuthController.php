@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\DB;
 use App\Exceptions\CustomException;
 use App\Http\Requests\api\LoginRequest;
 use Illuminate\Support\Facades\Log;
-use App\Repositories\api\AuthRepository;
+use App\Repositories\AuthRepository;
 use App\Http\Requests\api\RegisterRequest;
 
 class AuthController extends BaseController

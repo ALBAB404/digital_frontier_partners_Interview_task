@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Repositories\api;
+namespace App\Repositories;
 
 use Exception;
 use App\Models\Book;
@@ -38,8 +38,6 @@ class BookRepository
 
         return $books;
     }
-
-
     public function store($request)
     {
         try {
@@ -61,6 +59,21 @@ class BookRepository
 
             throw $exception;
         }
+    }
+
+    public function getAllBooks()
+    {
+        $books = $this->model->with("user:id,name")
+                              ->select("id", "title", "author", "user_id")
+                              ->orderBy("title", "ASC")
+                              ->get();
+        return $books;
+    }
+
+    public function destroy($id)
+    {
+        $book = $this->model->find($id);
+        $book->delete();
     }
 
 }
