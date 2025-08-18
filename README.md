@@ -31,6 +31,7 @@ Tech stack: Laravel, Passport (OAuth2), MySQL, Swagger (l5-swagger), React.js.
 
 ## 📁 Folder Structure (Highlights)
 
+```bash
 app/
 ├── Classes/                       # Base helpers for consistent API responses
 │   ├── BaseController.php
@@ -65,6 +66,7 @@ config/
 ├── app.php                        # nearby_books_radius (configurable)
 routes/
 └── api.php                        # /login, /register, /books, /books/nearby, /admin/*
+```
 
 # 🧩 Setup Instructions
 
