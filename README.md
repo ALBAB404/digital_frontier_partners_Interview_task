@@ -1,61 +1,249 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# 🧩 Task & Inventory Management System — Laravel + Vue + Inertia + API (JWT + Swagger)
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+This repository contains a complete full-stack solution for a **Task & Inventory Management System**, built using **Laravel (backend)** and **Vue.js + Inertia.js (frontend)**. The project demonstrates advanced features including custom role-based authentication, JWT-secured API, optimized database queries, and a pixel-perfect UI based on a provided Figma design.
 
-## About Laravel
+---
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## 🚀 Project Overview
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+This project was built as part of the 6AMTECH interview assessment. It includes:
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+- Secure **custom user authentication** (no Breeze/Jetstream).
+- **Role-based dashboard** system:
+  - `Admin` can manage users, tasks, and inventory.
+  - `User` can see reports, manage assigned tasks.
+- **JWT-based RESTful API** with:
+  - Task CRUD operations
+  - Laravel API Resources
+  - Swagger/OpenAPI docs
+- **Inventory module** with optimized Eloquent queries:
+  - Products, Categories, Transactions
+  - Indexed & eager loaded for high performance
+- **Vue.js + Inertia.js** frontend with pixel-perfect Figma integration.
 
-## Learning Laravel
+---
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+## 📁 Folder Structure (Highlights)
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+```bash
+app/
+├── Http/
+│   ├── Controllers/Api/         # API controllers (JWT)
+│   ├── Controllers/             # Web/Inertia controllers
+│   ├── Requests/                # Form validation
+│   ├── Resources/               # API resources
+│   ├── Manager/                 # Interfaces
+│   ├── Manager/Elequent/        # CRUD main Logical code
+│
+├── Models/
+│   ├── User.php
+│   ├── Task.php
+│   ├── Product.php
+│   ├── Category.php
+│   └── Transaction.php
+│
+resources/js/                   # Vue 3 + Inertia frontend 
+├── Adminend # Admin Dashboard Code
+├── Fronted # User Dashboard Code
+```
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+# 🧩 Setup Instructions
 
-## Laravel Sponsors
+### 1️⃣ Clone the Repository
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+```bash
+git clone https://github.com/shakib53626/6amTech.git
+```
+### 2️⃣ Move to Project Directory
 
-### Premium Partners
+```bash
+cd 6amTech
+```
+### 3️⃣ Install PHP Dependencies
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+```bash
+composer install
+```
 
-## Contributing
+### 4️⃣ Install NPM Packages
+```bash
+npm install
+```
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+### 5️⃣ Create and Configure .env
+```bash
+cp .env.example .env
+```
 
-## Code of Conduct
+Then configure the following in .env:
+-Database connection
+-JWT Secret:
+-Generate it via:
+```bash
+php artisan jwt:secret
+```
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+### 6️⃣ Generate App Key
+```bash
+php artisan key:generate
+```
 
-## Security Vulnerabilities
+### 7️⃣ Migrate your database
+```bash
+php artisan migrate:fresh --seed
+```
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+### 8️⃣ Start the application
 
-## License
+You can run the project using either of the following methods:
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+- **Method 1:** Run Laravel backend and frontend separately  
+```bash
+php artisan serve
+npm run dev
+```
+
+- **Method 2:** Run Laravel backend and frontend a single command  
+```bash
+composer run dev
+```
+Or
+```bash
+composer dev
+```
+
+### Need to image file 
+```bash
+php artisan storage:link
+```
+
+### Admin Login Credentials
+User : superadmin@gmail.com
+Password : password
+
+### User Login Credentials
+user : example@gmail.com
+password : password
+
+
+## After running, visit in your browser
+```bash
+http://localhost:8000
+```
+
+# 🧩 Environment configuration details
+### Database Configuration
+```bash
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=6amtech
+DB_USERNAME=root
+DB_PASSWORD=
+```
+
+### Swagger configuration
+
+```bash
+L5_SWAGGER_CONST_HOST=http://localhost:8000
+```
+
+### JWT Authenticaton Environment
+```bash
+JWT_SECRET=I3qd3uDP2JEKZYStxkUcpAiNi6wWJzhKtVcKM3iijTtdLN90kJTgyBL0crYfyyDd
+```
+Or
+```bash
+php artisan jwt:secret
+```
+
+# 🧩 Optimization Techniques (Task 3)
+To improve the performance of the Inventory Management System, the following optimization strategies were applied:
+
+## 1️⃣ Eager Loading (with with())
+Instead of using lazy loading, I used eager loading to prevent N+1 query problems.
+```bash
+    public function index($request)
+    {
+        $paginateSize = $request->input('paginate_size') ?? 50;
+
+        $query = Product::query()->with('category');
+
+        if ($request->filled('search')) {
+            $query->where('name', 'like', '%' . $request->input('search') . '%')
+                  ->orWhere('sku', 'like', '%' . $request->input('search') . '%');
+        }
+
+        $products = $query->orderBy('created_at', 'desc')->paginate($paginateSize);
+
+        return [
+            'products'   => $products,
+            'categories' => Category::select('id', 'name')->get(),
+        ];
+    }
+```
+## 2️⃣ Indexing (on searchable fields)
+I added database indexes on frequently queried columns such as:
+```base
+$table->string('name')->index();
+```
+
+## 📘 API Documentation
+
+This project includes a full-featured RESTful API for task management, secured using JWT authentication. The API supports user registration, login, and CRUD operations for tasks.
+
+### 🔐 Authentication Endpoints
+
+| Method | Endpoint        | Description              | Auth Required |
+| ------ | --------------- | ------------------------ | ------------- |
+| POST   | `/api/register` | Register a new user      | ❌ No          |
+| POST   | `/api/login`    | Login and get JWT token  | ❌ No          |
+| POST   | `/api/logout`   | Invalidate current token | ✅ Yes         |
+
+### 🔑 JWT Token Usage
+
+After login, the token should be included in the `Authorization` header of all subsequent requests:
+
+```http
+Authorization: Bearer <your_token_here>
+```
+
+---
+
+### 📌 Task Management Endpoints
+
+| Method | Endpoint          | Description             | Auth Required |
+| ------ | ----------------- | ----------------------- | ------------- |
+| GET    | `/api/tasks`      | Get all tasks           | ✅ Yes         |
+| POST   | `/api/tasks`      | Create a new task       | ✅ Yes         |
+| PUT    | `/api/tasks/{id}` | Update an existing task | ✅ Yes         |
+| DELETE | `/api/tasks/{id}` | Delete a task           | ✅ Yes         |
+
+#### ✅ Sample Task Request Payload:
+
+```json
+{
+  "title": "Finish Interview Task",
+  "description": "Implement all features and document them",
+  "priority": "High",
+  "completed": false,
+  "due_date": "2025-07-20",
+  "status": "In Progress",
+  "user_id": 1,
+  "category": "Development"
+}
+```
+
+---
+
+### 🧾 Swagger/OpenAPI Integration
+
+All the API endpoints are documented using **Swagger/OpenAPI**.
+
+You can visit the documentation UI at:
+
+```bash
+http://localhost:8000/api/documentation
+```
+
+Use the **Authorize 🔐** button to input your JWT token and test the protected endpoints directly from the Swagger interface.
