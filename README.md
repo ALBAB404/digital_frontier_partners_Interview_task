@@ -84,9 +84,26 @@ cd digital_frontier_partners_Interview_task
 composer install
 ```
 
+Could not delete C:\office files\react\it-folder\test\digital_frontier_partners_Interview_task/vendor/composer/90a4d387\swagger-api-swagger-ui-43ed706\dist\swagger-ui.css:
+This can be due to an antivirus or the Windows Search Indexer locking 
+the file while they are analyzed
+```bash
+composer require swagger-api/swagger-ui
+```
+
 ### 5️⃣ Create and Configure .env
 ```bash
 cp .env.example .env
+```
+
+### 6️⃣ Generate App Key
+```bash
+php artisan key:generate
+```
+
+### 7️⃣ Migrate your database
+```bash
+php artisan migrate:fresh --seed
 ```
 
 Then configure the following in .env:
@@ -107,38 +124,18 @@ Next, it may ask:  Which user provider should this client use to retrieve users?
 users
 ```
 
-### 6️⃣ Generate App Key
+Next, You Generate Passport Key
 ```bash
-php artisan key:generate
-```
-
-### 7️⃣ Migrate your database
-```bash
-php artisan migrate:fresh --seed
+php artisan passport:key
 ```
 
 ### 8️⃣ Start the application
 
 You can run the project using either of the following methods:
 
-- **Method 1:** Run Laravel backend and frontend separately  
+- Run Laravel backend  
 ```bash
 php artisan serve
-npm run dev
-```
-
-- **Method 2:** Run Laravel backend and frontend a single command  
-```bash
-composer run dev
-```
-Or
-```bash
-composer dev
-```
-
-### Need to image file 
-```bash
-php artisan storage:link
 ```
 
 ### Admin Login Credentials
@@ -161,24 +158,15 @@ http://localhost:8000
 DB_CONNECTION=mysql
 DB_HOST=127.0.0.1
 DB_PORT=3306
-DB_DATABASE=6amtech
+DB_DATABASE=digital_frontier_partners
 DB_USERNAME=root
 DB_PASSWORD=
 ```
 
-### Swagger configuration
+### Swagger Visit Url
 
 ```bash
-L5_SWAGGER_CONST_HOST=http://localhost:8000
-```
-
-### JWT Authenticaton Environment
-```bash
-JWT_SECRET=I3qd3uDP2JEKZYStxkUcpAiNi6wWJzhKtVcKM3iijTtdLN90kJTgyBL0crYfyyDd
-```
-Or
-```bash
-php artisan jwt:secret
+L5_SWAGGER_CONST_HOST=http://localhost:8000/api/documentation
 ```
 
 # 🧩 Optimization Techniques (Task 3)
