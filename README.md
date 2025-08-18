@@ -1,6 +1,6 @@
-# 🧩 Task & Inventory Management System — Laravel + Vue + Inertia + API (JWT + Swagger)
+# 🧩 Book Sharing Platform System — Laravel + React + API (Passport + Swagger)
 
-This repository contains a complete full-stack solution for a **Task & Inventory Management System**, built using **Laravel (backend)** and **Vue.js + Inertia.js (frontend)**. The project demonstrates advanced features including custom role-based authentication, JWT-secured API, optimized database queries, and a pixel-perfect UI based on a provided Figma design.
+This repository provides a backend API–driven Book Sharing Platform built with **Laravel, with a React.js frontend** consuming the APIs. Authenticated users can discover books shared by others within a configurable **radius (10 km by default)** from their **latitude/longitude** using the **Haversine formula**. The API is secured via Laravel **Passport (OAuth2 bearer tokens)** and fully documented with Swagger/OpenAPI (see /api/documentation). The system supports **role-based access (Admin/User)**, returns consistent JSON via Laravel API Resources (including distance and owner details), and ships with seed data for users and books.
 
 ---
 
