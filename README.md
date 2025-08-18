@@ -6,20 +6,26 @@ This repository provides a backend API–driven Book Sharing Platform built with
 
 ## 🚀 Project Overview
 
-This project was built as part of the 6AMTECH interview assessment. It includes:
+This project was built as part of the Digital Frontier Partners interview assessment. It includes:
 
-- Secure **custom user authentication** (no Breeze/Jetstream).
-- **Role-based dashboard** system:
-  - `Admin` can manage users, tasks, and inventory.
-  - `User` can see reports, manage assigned tasks.
-- **JWT-based RESTful API** with:
-  - Task CRUD operations
-  - Laravel API Resources
-  - Swagger/OpenAPI docs
-- **Inventory module** with optimized Eloquent queries:
-  - Products, Categories, Transactions
-  - Indexed & eager loaded for high performance
-- **Vue.js + Inertia.js** frontend with pixel-perfect Figma integration.
+- **Authentication (Laravel Passport/OAuth2)**: Secure token-based auth with access tokens.
+- **Role-based access**:
+  - **Admin**: List users, list all books, delete books.
+  - **User**: Share books and view nearby books.
+- **Nearby Books feature**:
+  - Geospatial search using the Haversine formula to find books shared by other users within a configurable radius (default **10 km**).
+  - Radius can be adjusted via `config/app.php` → `nearby_books_radius`.
+- **API Resources & responses**:
+  - Consistent JSON via Laravel API Resources.
+  - `BookResource` includes `distance` (km) and `user` info.
+- **Documentation (Swagger/OpenAPI)**:
+  - Auto-generated docs at `/api/documentation`, with Bearer token authorization.
+- **Seed data**:
+  - Sample users with latitude/longitude and sample books to test nearby search.
+- **Frontend (React.js)**:
+  - A React.js client consumes these REST endpoints.
+
+Tech stack: Laravel, Passport (OAuth2), MySQL, Swagger (l5-swagger), React.js.
 
 ---
 
