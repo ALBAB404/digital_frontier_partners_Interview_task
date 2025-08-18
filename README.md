@@ -160,9 +160,7 @@ DB_PASSWORD=
 ## 📥 Downloads
 
 - Postman Collection (v2.1):
-    <a href="https://github.com/ALBAB404/digital_frontier_partners_Interview_task/raw/master/BookSharing.postman_collection.json" download="BookSharing.postman_collection.json">
-    Download JSON
-    </a>
+  [Download JSON](https://raw.githubusercontent.com/ALBAB404/digital_frontier_partners_Interview_task/refs/heads/master/BookSharing.postman_collection.json)
 
 - Database SQL dump (MySQL):
   [Download SQL](https://raw.githubusercontent.com/ALBAB404/digital_frontier_partners_Interview_task/master/docs/sql/digital_frontier_partners.sql)
