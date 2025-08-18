@@ -31,27 +31,40 @@ Tech stack: Laravel, Passport (OAuth2), MySQL, Swagger (l5-swagger), React.js.
 
 ## 📁 Folder Structure (Highlights)
 
-```bash
 app/
+├── Classes/                       # Base helpers for consistent API responses
+│   ├── BaseController.php
+│   ├── BaseModel.php
+│   └── Helper.php
 ├── Http/
-│   ├── Controllers/Api/         # API controllers (JWT)
-│   ├── Controllers/             # Web/Inertia controllers
-│   ├── Requests/                # Form validation
-│   ├── Resources/               # API resources
-│   ├── Manager/                 # Interfaces
-│   ├── Manager/Elequent/        # CRUD main Logical code
-│
-├── Models/
-│   ├── User.php
-│   ├── Task.php
-│   ├── Product.php
-│   ├── Category.php
-│   └── Transaction.php
-│
-resources/js/                   # Vue 3 + Inertia frontend 
-├── Adminend # Admin Dashboard Code
-├── Fronted # User Dashboard Code
-```
+│   ├── Controllers/
+│   │   ├── api/                   # Public API (Passport-secured)
+│   │   │   ├── AuthController.php
+│   │   │   └── BookController.php
+│   │   └── admin/                 # Admin-only APIs (middleware: admin)
+│   │       ├── BookController.php
+│   │       └── UserController.php
+│   ├── Requests/
+│   │   └── api/                   # Request validation
+│   │       ├── RegisterRequest.php
+│   │       ├── LoginRequest.php
+│   │       └── BookRequest.php
+│   ├── Resources/                 # API Resources (transformers)
+│   │   ├── api/
+│   │   │   ├── BookResource.php
+│   │   │   └── BookCollection.php
+│   │   └── admin/
+│   └── Resources/BaseCollection.php
+├── Providers/
+│   └── AppServiceProvider.php
+└── Repositories/                  # Data access layer
+    └── api/
+        ├── AuthRepository.php
+        └── BookRepository.php
+config/
+├── app.php                        # nearby_books_radius (configurable)
+routes/
+└── api.php                        # /login, /register, /books, /books/nearby, /admin/*
 
 # 🧩 Setup Instructions
 
