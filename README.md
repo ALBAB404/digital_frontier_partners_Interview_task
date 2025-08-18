@@ -140,17 +140,11 @@ php artisan serve
 
 ### Admin Login Credentials
 User : superadmin@gmail.com
-Password : password
+Password : 123456
 
 ### User Login Credentials
-user : example@gmail.com
-password : password
-
-
-## After running, visit in your browser
-```bash
-http://localhost:8000
-```
+user : imalbab1@gmail.com
+password : 123456
 
 # 🧩 Environment configuration details
 ### Database Configuration
@@ -166,38 +160,59 @@ DB_PASSWORD=
 ### Swagger Visit Url
 
 ```bash
-L5_SWAGGER_CONST_HOST=http://localhost:8000/api/documentation
+http://localhost:8000/api/documentation
 ```
 
 # 🧩 Optimization Techniques (Task 3)
-To improve the performance of the Inventory Management System, the following optimization strategies were applied:
+To improve the performance of the Book Sharing Platform System, the following optimization strategies were applied:
 
 ## 1️⃣ Eager Loading (with with())
 Instead of using lazy loading, I used eager loading to prevent N+1 query problems.
 ```bash
-    public function index($request)
+    public function index()
     {
-        $paginateSize = $request->input('paginate_size') ?? 50;
+        $user = auth()->user();
+        $latitude = $user->latitude;
+        $longitude = $user->longitude;
 
-        $query = Product::query()->with('category');
+        $radius = config('app.nearby_books_radius', 10);
 
-        if ($request->filled('search')) {
-            $query->where('name', 'like', '%' . $request->input('search') . '%')
-                  ->orWhere('sku', 'like', '%' . $request->input('search') . '%');
-        }
+        $books = $this->model
+            ->with('user')
+            ->selectRaw(
+                "books.*,
+                (6371 * acos(cos(radians(?))
+                * cos(radians(users.latitude))
+                * cos(radians(users.longitude) - radians(?))
+                + sin(radians(?))
+                * sin(radians(users.latitude)))) AS distance",
+                [$latitude, $longitude, $latitude]
+            )
+            ->join('users', 'users.id', '=', 'books.user_id')
+            ->where('books.user_id', '!=', $user->id)
+            ->having('distance', '<', $radius)
+            ->orderBy('distance')
+            ->get();
 
-        $products = $query->orderBy('created_at', 'desc')->paginate($paginateSize);
+        return $books;
+    }
 
-        return [
-            'products'   => $products,
-            'categories' => Category::select('id', 'name')->get(),
-        ];
+    AND 
+
+
+    public function getAllBooks()
+    {
+        $books = $this->model->with("user:id,name")
+                              ->select("id", "title", "author", "user_id")
+                              ->orderBy("title", "ASC")
+                              ->get();
+        return $books;
     }
 ```
 ## 2️⃣ Indexing (on searchable fields)
 I added database indexes on frequently queried columns such as:
 ```base
-$table->string('name')->index();
+$table->string('title')->index();
 ```
 
 ## 📘 API Documentation
@@ -210,9 +225,8 @@ This project includes a full-featured RESTful API for task management, secured u
 | ------ | --------------- | ------------------------ | ------------- |
 | POST   | `/api/register` | Register a new user      | ❌ No          |
 | POST   | `/api/login`    | Login and get JWT token  | ❌ No          |
-| POST   | `/api/logout`   | Invalidate current token | ✅ Yes         |
 
-### 🔑 JWT Token Usage
+### 🔑 Passport Token Usage
 
 After login, the token should be included in the `Authorization` header of all subsequent requests:
 
@@ -222,28 +236,36 @@ Authorization: Bearer <your_token_here>
 
 ---
 
-### 📌 Task Management Endpoints
+### 📌 Book And User Endpoints (For User)
 
-| Method | Endpoint          | Description             | Auth Required |
-| ------ | ----------------- | ----------------------- | ------------- |
-| GET    | `/api/tasks`      | Get all tasks           | ✅ Yes         |
-| POST   | `/api/tasks`      | Create a new task       | ✅ Yes         |
-| PUT    | `/api/tasks/{id}` | Update an existing task | ✅ Yes         |
-| DELETE | `/api/tasks/{id}` | Delete a task           | ✅ Yes         |
+| Method | Endpoint             | Description             | Auth Required |
+| ------ | -----------------    | ----------------------- | ------------- |
+| GET    | `/api/books/nearby`  | Get all Books           | ✅ Yes         |
+| POST   | `/api/books`         | Create a new book       | ✅ Yes         |
 
-#### ✅ Sample Task Request Payload:
+### 📌 Book And User Endpoints (For Admin)
+
+| Method | Endpoint             | Description             | Auth Required |
+| ------ | -----------------    | ----------------------- | ------------- |
+| GET    | `/admin/users`       | Get all users           | ✅ Yes         |
+| GET    | `/admin/books`       | Get all Books           | ✅ Yes         |
+| DELETE | `/admin/books/{ID}`  | Create a new book       | ✅ Yes         |
+
+#### ✅ Sample Book Request Payload:
 
 ```json
 {
-  "title": "Finish Interview Task",
-  "description": "Implement all features and document them",
-  "priority": "High",
-  "completed": false,
-  "due_date": "2025-07-20",
-  "status": "In Progress",
-  "user_id": 1,
-  "category": "Development"
-}
+    "id": 5,
+    "title": "The Catcher in the Rye",
+    "author": "J.D. Salinger",
+    "description": "A story about teenage rebellion and angst",
+    "user_id": 5,
+    "distance": "3.18 km",
+    "user": {
+        "id": 5,
+        "name": "Bob Johnson"
+    }
+},
 ```
 
 ---
