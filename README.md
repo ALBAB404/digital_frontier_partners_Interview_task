@@ -56,8 +56,6 @@ app/
 │   │   │   └── BookCollection.php
 │   │   └── admin/
 │   └── Resources/BaseCollection.php
-├── Providers/
-│   └── AppServiceProvider.php
 └── Repositories/                  # Data access layer
     └── api/
         ├── AuthRepository.php
@@ -73,22 +71,17 @@ routes/
 ### 1️⃣ Clone the Repository
 
 ```bash
-git clone https://github.com/shakib53626/6amTech.git
+git clone https://github.com/ALBAB404/digital_frontier_partners_Interview_task.git
 ```
 ### 2️⃣ Move to Project Directory
 
 ```bash
-cd 6amTech
+cd digital_frontier_partners_Interview_task
 ```
 ### 3️⃣ Install PHP Dependencies
 
 ```bash
 composer install
-```
-
-### 4️⃣ Install NPM Packages
-```bash
-npm install
 ```
 
 ### 5️⃣ Create and Configure .env
@@ -98,10 +91,20 @@ cp .env.example .env
 
 Then configure the following in .env:
 -Database connection
--JWT Secret:
+-Passport Secret:
 -Generate it via:
 ```bash
-php artisan jwt:secret
+php artisan passport:client --personal
+```
+
+Then it will ask:  What should we name the client? [Laravel]
+```bash
+Interview Task Personal Client
+```
+
+Next, it may ask:  Which user provider should this client use to retrieve users? [users]
+```bash
+users
 ```
 
 ### 6️⃣ Generate App Key
