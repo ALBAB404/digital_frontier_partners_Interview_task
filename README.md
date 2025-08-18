@@ -1,4 +1,4 @@
-# 🧩 Book Sharing Platform System — Laravel + React + API (Passport + Swagger)
+# 🧩 Book Sharing Platform System — Laravel + API (Passport + Swagger) And React.js For Frontend
 
 This repository provides a backend API–driven Book Sharing Platform built with **Laravel, with a React.js frontend** consuming the APIs. Authenticated users can discover books shared by others within a configurable **radius (10 km by default)** from their **latitude/longitude** using the **Haversine formula**. The API is secured via Laravel **Passport (OAuth2 bearer tokens)** and fully documented with Swagger/OpenAPI (see /api/documentation). The system supports **role-based access (Admin/User)**, returns consistent JSON via Laravel API Resources (including distance and owner details), and ships with seed data for users and books.
 
@@ -91,17 +91,17 @@ the file while they are analyzed
 composer require swagger-api/swagger-ui
 ```
 
-### 5️⃣ Create and Configure .env
+### 4️⃣ Create and Configure .env
 ```bash
 cp .env.example .env
 ```
 
-### 6️⃣ Generate App Key
+### 5️⃣ Generate App Key
 ```bash
 php artisan key:generate
 ```
 
-### 7️⃣ Migrate your database
+### 6️⃣ Migrate your database
 ```bash
 php artisan migrate:fresh --seed
 ```
@@ -129,7 +129,7 @@ Next, You Generate Passport Key
 php artisan passport:key
 ```
 
-### 8️⃣ Start the application
+### 7️⃣ Start the application
 
 You can run the project using either of the following methods:
 
